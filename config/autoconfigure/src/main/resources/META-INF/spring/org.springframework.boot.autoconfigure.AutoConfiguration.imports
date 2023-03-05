@@ -1,0 +1,2 @@
+org.springframework.security.kerberos.config.autoconfigure.reactive.ReactiveKerberosServerAutoConfiguration
+org.springframework.security.kerberos.config.autoconfigure.servlet.KerberosServerAutoConfiguration

@@ -70,8 +70,7 @@ public class ReactiveKerberosServerConfiguration {
 		spnegoAuthenticationWebFilter.setServerAuthenticationConverter(new SpnegoServerAuthenticationConverter());
 		spnegoAuthenticationWebFilter.setSecurityContextRepository(new WebSessionServerSecurityContextRepository());
 		return http.authorizeExchange(optionalCustomizer.orElse((exchanges) -> exchanges.anyExchange().authenticated()))
-				.exceptionHandling().authenticationEntryPoint(new SpnegoServerAuthenticationEntryPoint())
-				.and()
+				.exceptionHandling().authenticationEntryPoint(new SpnegoServerAuthenticationEntryPoint()).and()
 				.addFilterAt(spnegoAuthenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION).build();
 	}
 

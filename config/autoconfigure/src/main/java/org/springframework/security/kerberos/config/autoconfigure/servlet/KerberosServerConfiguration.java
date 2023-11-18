@@ -44,10 +44,11 @@ public class KerberosServerConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http, SpnegoEntryPoint spnegoEntryPoint,
 			SpnegoAuthenticationProcessingFilter spnegoAuthenticationProcessingFilter,
-			Optional<Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>> optionalCustomizer) throws Exception {
-		http.authorizeHttpRequests(optionalCustomizer.orElse((authorizeHttpRequests) -> authorizeHttpRequests.anyRequest().authenticated()))
-				.exceptionHandling().authenticationEntryPoint(spnegoEntryPoint)
-				.and()
+			Optional<Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>> optionalCustomizer)
+			throws Exception {
+		http.authorizeHttpRequests(optionalCustomizer
+				.orElse((authorizeHttpRequests) -> authorizeHttpRequests.anyRequest().authenticated()))
+				.exceptionHandling().authenticationEntryPoint(spnegoEntryPoint).and()
 				.addFilterBefore(spnegoAuthenticationProcessingFilter, BasicAuthenticationFilter.class);
 		return http.build();
 	}
